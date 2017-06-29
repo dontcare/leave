@@ -16,6 +16,7 @@ git_init:
 
 httpparser:
 	cd vendors/httpparser/ && make pico && make
+	pip install -e vendors/httpparser
 
 http:
 	 gcc -c leave/http.c -O3 -fpic
@@ -25,6 +26,7 @@ build:
 
 r3py:
 	cd vendors/r3py/ && make r3 && make
+	pip install -e vendors/r3py
 
 all: clean git_init compile
 
