@@ -29,6 +29,8 @@ matrix:
       env: BUILD=tests,wheels,release
       install:
         - pip install --upgrade pip
+        - pip install cython
+      script:
         - make
 
 cache:
