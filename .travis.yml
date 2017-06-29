@@ -13,12 +13,12 @@ env:
 matrix:
   fast_finish: true
   include:
-    - os: osx
-      services: [docker]
-      env:
-        - CIBW_BEFORE_BUILD="sh -c 'pip install cython && make all'"
-        - PLATFORM=macos
-      
+    #- os: osx
+    #  services: [docker]
+    #  env:
+    #    - CIBW_BEFORE_BUILD="sh -c 'pip install cython && make all'"
+    #    - PLATFORM=macos
+    #  
     - os: linux
       sudo: false
       dist: trusty
@@ -28,6 +28,9 @@ matrix:
       env:
         - CIBW_BEFORE_BUILD="pip install --upgrade pip && pip install cython && make all"
         - PLATFORM=linux
+      before_install:
+        - sudo apt-get update -q
+        - sudo apt-get install build-essential libtool -y
 
 cache:
   pip
