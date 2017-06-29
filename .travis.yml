@@ -1,0 +1,40 @@
+language: generic
+
+env:
+  global:
+    - PYMODULE: httpparser
+    - RELEASE_PYTHON_VERSIONS: "3.5 3.6"
+    - TWINE_USERNAME: dontcare
+    - TWINE_REPOSITORY: httpparser
+    - TWINE_REPOSITORY_URL: https://upload.pypi.org/legacy/
+    - CIBW_SKIP="cp26-* cp27-* cp33-* cp34*"
+    - CIBW_OUPUT_DIR="dist/"
+
+matrix:
+  fast_finish: true
+  include:
+    - os: osx
+      services: [docker]
+      env:
+        - CIBW_BEFORE_BUILD="sh -c 'pip install cython && make all'"
+        - PLATFORM=macos
+      
+    - os: linux
+      sudo: false
+      dist: trusty
+      language: python
+      python: "2.7.13"
+      services: [docker]
+      env:
+        - CIBW_BEFORE_BUILD="pip install --upgrade pip && pip install cython && make all"
+        - PLATFORM=linux
+
+cache:
+  pip
+
+install:
+  - pip install pip --upgrade  
+  - pip install cibuildwheel
+
+script:
+  - cibuildwheel --platform $PLATFORM --output-dir $CIBW_OUPUT_DIR
