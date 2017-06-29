@@ -1,0 +1,8 @@
+[submodule "vendors/httpparser"]
+	path = vendors/httpparser
+	url = https://github.com/dontcare/httpparser.git
+	branch = master
+[submodule "vendors/r3py"]
+	path = vendors/r3py
+	url = https://github.com/dontcare/r3py.git
+	branch = master
